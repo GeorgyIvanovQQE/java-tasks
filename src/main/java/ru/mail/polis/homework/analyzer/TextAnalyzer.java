@@ -16,22 +16,30 @@ package ru.mail.polis.homework.analyzer;
  */
 public interface TextAnalyzer {
 
+    FilterType analyze(String text);
+
+
+
     static TextAnalyzer createTooLongAnalyzer(long maxLength) {
-        return null;
+        return new TooLongFilter(maxLength);
     }
 
     static TextAnalyzer createSpamAnalyzer(String[] spam) {
-        return null;
+        return new SpamFilter(spam);
     }
 
     static TextAnalyzer createNegativeTextAnalyzer() {
-        return null;
+        return new NegativeFilter();
     }
 
     /**
      * придумать свой фильтр
      */
+
+
     static <T> TextAnalyzer createCustomAnalyzer(T something) {
         return null;
     }
+
+    FilterType getType();
 }
